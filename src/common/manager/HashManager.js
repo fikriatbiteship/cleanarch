@@ -1,7 +1,7 @@
-const CommonManager = require("./CommonManager");
+const Manager = require("./Manager");
 const bcrypt = require("bcrypt");
 
-class HashManager extends CommonManager {
+class HashManager extends Manager {
   hash(value) {
     return bcrypt.hashSync(value, 10);
   }

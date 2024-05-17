@@ -27,8 +27,7 @@ module.exports = {
     }),
 
   onError: (err, req, res, _next) => {
-    if (err instanceof ApplicationError)
-      return res.status(err.code).json(err.toJSON());
+    if (err instanceof ApplicationError) return res.status(err.code).json(err.toJSON());
 
     if (err instanceof SyntaxError && err.status === 400 && "body" in err)
       return res.status(400).send({

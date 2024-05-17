@@ -1,44 +1,54 @@
 const { Query } = require("mongoose");
-const CommonObject = require("./object");
-const CommonEntity = require("./entity");
-const CommonSpecification = require("./specification");
+const Object = require("./object");
+const Entity = require("./entity");
+const Specification = require("./specification");
+const NotImplementedError = require("./errors/NotImplementedError");
 
-class CommonRepository extends CommonObject {
+class Repository extends Object {
   /**
    * Find an entity
-   * @param {CommonSpecification[]} _specs
-   * @returns {Promise<CommonEntity[]>}
+   * @param {...Specification} specs
+   * @returns {Promise<Entity[]>}
    */
-  findOne(_specs) {
-    throw new Error("Method not implemented");
+  findOne(specs) {
+    throw new NotImplementedError()
   }
 
   /**
    * Find entities
-   * @param {Query} _query
-   * @returns {Promise<CommonEntity>}
+   * @param {Query} query
+   * @returns {Promise<Entity>}
    */
-  find(_query) {
-    throw new Error("Method not implemented");
+  find(query) {
+    throw new NotImplementedError()
+  }
+
+  /**
+   * Get size of entities
+   * @param {...Specification} _specs
+   * @returns {Promise<number>}
+   */
+  size(specs) {
+    throw new NotImplementedError()
   }
 
   /**
    * Save an entity.
-   * @param {CommonEntity} _entity
+   * @param {Entity} entity
    * @returns {Promise<boolean>}
    */
-  save(_entity) {
-    throw new Error("Method not implemented");
+  save(entity) {
+    throw new NotImplementedError()
   }
 
   /**
    * Delete an entity.
-   * @param {CommonEntity} _entity
+   * @param {Entity} entity
    * @returns {Promise<boolean>}
    */
-  delete(_entity) {
-    throw new Error("Method not implemented");
+  delete(entity) {
+    throw new NotImplementedError()
   }
 }
 
-module.exports = CommonRepository;
+module.exports = Repository;

@@ -1,7 +1,7 @@
-const CommonEntity = require("../../common/entity");
+const Entity = require("../../common/entity");
 const uuid = require("uuid");
 
-class User extends CommonEntity {
+class User extends Entity {
   constructor({ id, username, encryptedPassword, createdAt, updatedAt }) {
     super();
 

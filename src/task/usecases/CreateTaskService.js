@@ -1,10 +1,11 @@
-const CommonUseCase = require("../../common/usecase");
+const UseCase = require("../../common/usecase");
 const Task = require("../entity/Task");
 const TaskRepository = require("../repositories/TaskRepository");
+const TaskStatus = require("../values/TaskStatus");
 const CreateTaskParams = require("./CreateTaskParams");
 const CreateTaskResult = require("./CreateTaskResult");
 
-class CreateTaskService extends CommonUseCase {
+class CreateTaskService extends UseCase {
   /**
    * Create CreateTaskService instance
    * @param {Object} deps
@@ -25,6 +26,8 @@ class CreateTaskService extends CommonUseCase {
     const now = params.now();
     const task = new Task({
       name: params.name,
+      status: TaskStatus.Todo,
+      userId: params.userId,
       createdAt: now,
       updatedAt: now,
     });

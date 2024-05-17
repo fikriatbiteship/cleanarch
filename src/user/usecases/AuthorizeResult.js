@@ -1,6 +1,6 @@
-const CommonResult = require("../../common/result");
+const Result = require("../../common/result");
 
-class AuthorizeResult extends CommonResult {
+class AuthorizeResult extends Result {
   constructor({ user }) {
     super();
 

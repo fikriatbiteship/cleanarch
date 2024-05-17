@@ -1,5 +1,5 @@
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonParams extends CommonObject {}
+class Params extends Object {}
 
-module.exports = CommonParams;
+module.exports = Params;

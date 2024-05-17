@@ -1,4 +1,4 @@
-const CommonUseCase = require("../../common/usecase");
+const UseCase = require("../../common/usecase");
 const User = require("../entity/User");
 const UsernameIsSpecification = require("../specifications/UsernameIsSpecification");
 const UserRepository = require("../repositories/UserRepository");
@@ -7,7 +7,7 @@ const RegisterParams = require("./RegisterParams");
 const RegisterResult = require("./RegisterResult");
 const HashManager = require("../../common/manager/HashManager");
 
-class RegisterService extends CommonUseCase {
+class RegisterService extends UseCase {
   /**
    * Creates an instance of RegisterUseCase.
    * @param {Object} deps - The repository for accessing user data.
@@ -29,9 +29,7 @@ class RegisterService extends CommonUseCase {
   async call(params) {
     const now = this.now();
 
-    const existingUser = await this.userRepository.findOne([
-      new UsernameIsSpecification(params.username),
-    ]);
+    const existingUser = await this.userRepository.findOne(new UsernameIsSpecification(params.username));
 
     if (!!existingUser) throw new UsernameAlreadyTakenError();
 

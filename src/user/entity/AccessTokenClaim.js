@@ -1,7 +1,7 @@
-const CommonEntity = require("../../common/entity");
+const Entity = require("../../common/entity");
 const User = require("./User");
 
-class AccessTokenClaim extends CommonEntity {
+class AccessTokenClaim extends Entity {
   constructor({ id, sub }) {
     super();
 

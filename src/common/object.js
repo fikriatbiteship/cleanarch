@@ -1,7 +1,7 @@
-class CommonObject {
+class Object {
   now() {
     return new Date();
   }
 }
 
-module.exports = CommonObject;
+module.exports = Object;

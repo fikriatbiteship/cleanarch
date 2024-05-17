@@ -1,5 +1,5 @@
-const CommonObject = require("./object");
+const Handler = require("./handler");
 
-class CommonMiddleware extends CommonObject {}
+class Middleware extends Handler {}
 
-module.exports = CommonMiddleware;
+module.exports = Middleware;

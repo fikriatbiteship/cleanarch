@@ -1,43 +1,43 @@
 const NotImplementedError = require("../../../common/errors/NotImplementedError");
-const CommonRepository = require("../../../common/repository");
+const Repository = require("../../../common/repository");
 const User = require("../../entity/User");
-const CommonSpecification = require("../../../common/specification");
+const Specification = require("../../../common/specification");
 const Query = require("../../../common/query");
 
-class UserRepository extends CommonRepository {
+class UserRepository extends Repository {
   /**
    * Find a user
-   * @param {CommonSpecification[]} _specs
+   * @param {...Specification} specs
    * @returns {Promise<User>}
    */
-  async findOne(_specs) {
+  async findOne(...specs) {
     throw new NotImplementedError();
   }
 
   /**
    * Find users
-   * @param {Query} _query
+   * @param {Query} query
    * @returns {Promise<User[]>}
    */
-  async find(_query) {
+  async find(query) {
     throw new NotImplementedError();
   }
 
   /**
    * Save user
-   * @param {User} _user
+   * @param {User} user
    * @returns {Promise<boolean>}
    */
-  async save(_user) {
+  async save(user) {
     throw new NotImplementedError();
   }
 
   /**
    * Delete user
-   * @param {User} _user
+   * @param {User} user
    * @returns {Promise<boolean>}
    */
-  async delete(_user) {
+  async delete(user) {
     throw new NotImplementedError();
   }
 }

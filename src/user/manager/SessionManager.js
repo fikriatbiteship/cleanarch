@@ -1,18 +1,16 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const CommonManager = require("../../common/manager/CommonManager");
+const Manager = require("../../common/manager/Manager");
 const User = require("../entity/User");
 const Session = require("../entity/Session");
 const AccessTokenClaim = require("../entity/AccessTokenClaim");
 
-class SessionManager extends CommonManager {
+class SessionManager extends Manager {
   constructor() {
     super();
 
-    this.accessTokenSecret =
-      process.env.ACCESS_TOKEN_SECRET || "kDdhc<v58~yNpm/u9P:`_f";
-    this.refreshTokenSecret =
-      process.env.REFRESH_TOKEN_SECRET || "Dj3ht^E}.rGaZ@)82CLW/#";
+    this.accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || "kDdhc<v58~yNpm/u9P:`_f";
+    this.refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET || "Dj3ht^E}.rGaZ@)82CLW/#";
   }
 
   /**
@@ -21,18 +19,9 @@ class SessionManager extends CommonManager {
    * @return {Promise<Session>}
    */
   createSession(user) {
-    const accessToken = jwt.sign(
-      { id: user.id, sub: user.username },
-      this.accessTokenSecret,
-    );
-    const accessTokenMd5Hash = crypto
-      .createHash("md5")
-      .update(accessToken)
-      .digest("hex");
-    const refreshToken = jwt.sign(
-      { id: user.id, sub: user.username, hash: accessTokenMd5Hash },
-      this.refreshTokenSecret,
-    );
+    const accessToken = jwt.sign({ id: user.id, sub: user.username }, this.accessTokenSecret);
+    const accessTokenMd5Hash = crypto.createHash("md5").update(accessToken).digest("hex");
+    const refreshToken = jwt.sign({ id: user.id, sub: user.username, hash: accessTokenMd5Hash }, this.refreshTokenSecret);
 
     return new Session({
       accessToken,

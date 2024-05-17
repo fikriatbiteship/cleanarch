@@ -2,7 +2,7 @@ const AccessTokenInvalidError = require("../errors/AccessTokenInvalidError");
 const ApplicationError = require("../../common/errors/ApplicationError");
 const AuthorizeParams = require("./AuthorizeParams");
 const AuthorizeResult = require("./AuthorizeResult");
-const CommonUseCase = require("../../common/usecase");
+const UseCase = require("../../common/usecase");
 const IdIsSpecification = require("../specifications/IdIsSpecification");
 const MissingAccessTokenError = require("../errors/MissingAccessTokenError");
 const MissingAuthorizedUserError = require("../errors/MissingAuthorizedUserError");
@@ -11,7 +11,7 @@ const SessionManager = require("../manager/SessionManager");
 const Session = require("../entity/Session");
 const UsernameIsSpecification = require("../specifications/UsernameIsSpecification");
 
-class AuthorizeService extends CommonUseCase {
+class AuthorizeService extends UseCase {
   /**
    * Creates an instance of AuthorizeUseCase.
    * @param {Object} deps - The repository for accessing user data.
@@ -39,10 +39,7 @@ class AuthorizeService extends CommonUseCase {
         }),
       );
 
-      const user = await this.userRepository.findOne([
-        new IdIsSpecification(claim.id),
-        new UsernameIsSpecification(claim.sub),
-      ]);
+      const user = await this.userRepository.findOne(new IdIsSpecification(claim.id), new UsernameIsSpecification(claim.sub));
       if (!user) throw new MissingAuthorizedUserError();
 
       return new AuthorizeResult({ user });

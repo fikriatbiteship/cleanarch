@@ -1,7 +1,25 @@
+const UserMiddleware = require("../user/UserMiddleware");
+const SessionManager = require("../user/manager/SessionManager");
+const MongoUserRepository = require("../user/repositories/UserRepository/MongoUserRepository");
+const AuthorizeService = require("../user/usecases/AuthorizeService");
 const NotImplementedError = require("./errors/NotImplementedError");
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonModule extends CommonObject {
+class Module extends Object {
+  wireSecurityModules() {
+    this.sessionManager = new SessionManager();
+    this.userRepository = new MongoUserRepository();
+
+    this.authorizationService = new AuthorizeService({
+      userRepository: this.userRepository,
+      sessionManager: this.sessionManager,
+    });
+
+    this.userMiddleware = new UserMiddleware({
+      authorizeService: this.authorizationService,
+    });
+  }
+
   wire() {
     throw new NotImplementedError();
   }
@@ -15,4 +33,4 @@ class CommonModule extends CommonObject {
   }
 }
 
-module.exports = CommonModule;
+module.exports = Module;

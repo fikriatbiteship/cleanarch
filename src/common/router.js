@@ -1,7 +1,7 @@
 const express = require("express");
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonRouter extends CommonObject {
+class Router extends Object {
   constructor() {
     super();
 
@@ -15,4 +15,4 @@ class CommonRouter extends CommonObject {
   }
 }
 
-module.exports = CommonRouter;
+module.exports = Router;

@@ -43,11 +43,7 @@ process.on("unhandledRejection", async (reason, promise) => {
 
     if (reason.response?.config) {
       const requestConfig = reason.response?.config;
-      logger.error(
-        "unhandledRejection:",
-        requestConfig.method.toUpperCase(),
-        requestConfig.url,
-      );
+      logger.error("unhandledRejection:", requestConfig.method.toUpperCase(), requestConfig.url);
     }
   } catch (error) {
     logger.error("unhandledRejection:", error.message);
@@ -66,11 +62,7 @@ mongoose
     });
   })
   .catch((err) => {
-    logger.error(
-      "mongodb:",
-      "cannot connect to database with error:",
-      err.message,
-    );
+    logger.error("mongodb:", "cannot connect to database with error:", err.message);
   });
 
 /**

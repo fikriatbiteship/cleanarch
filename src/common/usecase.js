@@ -1,5 +1,5 @@
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonUseCase extends CommonObject {}
+class UseCase extends Object {}
 
-module.exports = CommonUseCase;
+module.exports = UseCase;

@@ -1,6 +1,6 @@
-const CommonSpecification = require("../../common/specification");
+const Specification = require("../../common/specification");
 
-class IdIsSpecification extends CommonSpecification {
+class IdIsSpecification extends Specification {
   constructor(id) {
     super();
 

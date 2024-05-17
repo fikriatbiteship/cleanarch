@@ -16,6 +16,9 @@ const taskSchema = new mongoose.Schema(
       required: true,
       enum: ["TODO", "IN_PROGRESS", "DONE"],
     },
+    userId: {
+      type: mongoose.SchemaTypes.UUID,
+    },
   },
   {
     timestamps: true,
@@ -25,8 +28,9 @@ const taskSchema = new mongoose.Schema(
 taskSchema.methods.toEntity = function () {
   return new Task({
     id: this.id,
-    name: this.taskname,
+    name: this.name,
     status: this.status,
+    userId: this.userId,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
   });

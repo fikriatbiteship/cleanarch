@@ -1,43 +1,52 @@
 const NotImplementedError = require("../../../common/errors/NotImplementedError");
-const CommonRepository = require("../../../common/repository");
+const Repository = require("../../../common/repository");
 const Task = require("../../entity/Task");
-const CommonSpecification = require("../../../common/specification");
+const Specification = require("../../../common/specification");
 const Query = require("../../../common/query");
 
-class TaskRepository extends CommonRepository {
+class TaskRepository extends Repository {
   /**
    * Find a task
-   * @param {CommonSpecification[]} _specs
+   * @param {...Specification} specs
    * @returns {Promise<Task>}
    */
-  async findOne(_specs) {
+  async findOne(...specs) {
     throw new NotImplementedError();
   }
 
   /**
    * Find tasks
-   * @param {Query} _query
+   * @param {Query} query
    * @returns {Promise<Task[]>}
    */
-  async find(_query) {
+  async find(query) {
     throw new NotImplementedError();
   }
 
   /**
+   * Get tasks size
+   * @param {...Specification} specs
+   * @returns {Promise<number>}
+   */
+  async size(...specs) {
+    throw new NotImplementedError()
+  }
+
+  /**
    * Save task
-   * @param {Task} _task
+   * @param {Task} task
    * @returns {Promise<boolean>}
    */
-  async save(_task) {
+  async save(task) {
     throw new NotImplementedError();
   }
 
   /**
    * Delete task
-   * @param {Task} _task
+   * @param {Task} task
    * @returns {Promise<boolean>}
    */
-  async delete(_task) {
+  async delete(task) {
     throw new NotImplementedError();
   }
 }

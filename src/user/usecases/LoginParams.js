@@ -1,6 +1,6 @@
-const CommonParams = require("../../common/params");
+const Params = require("../../common/params");
 
-class LoginParams extends CommonParams {
+class LoginParams extends Params {
   constructor({ username, password }) {
     super();
 

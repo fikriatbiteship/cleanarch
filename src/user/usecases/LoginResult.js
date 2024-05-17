@@ -1,7 +1,7 @@
-const CommonResult = require("../../common/result");
+const Result = require("../../common/result");
 const Session = require("../entity/Session");
 
-class LoginResult extends CommonResult {
+class LoginResult extends Result {
   /**
    * Creates an instance of LoginResult.
    * @param {Object} values

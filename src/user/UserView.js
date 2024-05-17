@@ -1,13 +1,13 @@
-const CommonView = require("../common/view");
+const View = require("../common/view");
 const LoginResult = require("./usecases/LoginResult");
 const RegisterResult = require("./usecases/RegisterResult");
 
-class UserView extends CommonView {
+class UserView extends View {
   /**
    * Lorem ipsum dolor sit amet.
    * @param {LoginResult} loginResult
    */
-  loginResponseJSON(loginResult) {
+  login(loginResult) {
     return {
       session: loginResult.session.toJSON(),
     };
@@ -17,7 +17,7 @@ class UserView extends CommonView {
    * Lorem ipsum dolor sit amet.
    * @param {RegisterResult} registerResult
    */
-  registerResponseJSON(registerResult) {
+  register(registerResult) {
     return {
       user: registerResult.user.toJSON(),
     };
@@ -27,7 +27,7 @@ class UserView extends CommonView {
    * Lorem ipsum dolor sit amet.
    * @param {RegisterResult} registerResult
    */
-  whoamiResponseJSON(user) {
+  whoami(user) {
     return {
       user: user.toJSON(),
     };

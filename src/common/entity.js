@@ -1,5 +1,5 @@
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonEntity extends CommonObject {}
+class Entity extends Object {}
 
-module.exports = CommonEntity;
+module.exports = Entity;

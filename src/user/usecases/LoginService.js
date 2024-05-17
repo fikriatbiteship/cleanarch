@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const CommonUseCase = require("../../common/usecase");
+const UseCase = require("../../common/usecase");
 const UserNameIsSpecification = require("../specifications/UsernameIsSpecification");
 const UserRepository = require("../repositories/UserRepository");
 const UsernameNotFoundError = require("../errors/UsernameNotFoundError");
@@ -10,7 +10,7 @@ const LoginResult = require("./LoginResult");
 const HashManager = require("../../common/manager/HashManager");
 const SessionManager = require("../manager/SessionManager");
 
-class LoginService extends CommonUseCase {
+class LoginService extends UseCase {
   /**
    * Creates an instance of LoginUseCase.
    * @param {Object} deps - The repository for accessing user data.
@@ -32,14 +32,11 @@ class LoginService extends CommonUseCase {
    * @returns {Promise<LoginResult>}
    */
   async call(params) {
-    const user = await this.userRepository.findOne([
-      new UserNameIsSpecification(params.username),
-    ]);
+    const user = await this.userRepository.findOne(new UserNameIsSpecification(params.username));
 
     if (!user) throw new UsernameNotFoundError();
 
-    if (!this.hashManager.compare(params.password, user.encryptedPassword))
-      throw new PasswordInvalidError();
+    if (!this.hashManager.compare(params.password, user.encryptedPassword)) throw new PasswordInvalidError();
 
     return new LoginResult({
       session: this.sessionManager.createSession(user),

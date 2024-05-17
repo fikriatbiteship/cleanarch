@@ -3,15 +3,15 @@ const UsernameIsSpecification = require("../../../specifications/UsernameIsSpeci
 const UserRepository = require("../");
 const UserModel = require("./model");
 const User = require("../../../entity/User");
-const CommonSpecification = require("../../../../common/specification");
+const Specification = require("../../../../common/specification");
 
 class MongoUserRepository extends UserRepository {
   /**
-   * Find users
-   * @param {CommonSpecification[]} specs
-   * @returns {Promise<User[]>}
+   * Find a user
+   * @param {...Specification} specs
+   * @returns {Promise<User>}
    */
-  async findOne(specs) {
+  async findOne(...specs) {
     const mQuery = this._query(specs);
     const user = await UserModel.findOne(mQuery);
     if (!user) return null;

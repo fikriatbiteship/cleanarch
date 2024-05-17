@@ -1,5 +1,5 @@
-const CommonObject = require("./object");
+const Object = require("./object");
 
-class CommonSpecification extends CommonObject {}
+class Specification extends Object {}
 
-module.exports = CommonSpecification;
+module.exports = Specification;

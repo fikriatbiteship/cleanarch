@@ -1,15 +1,11 @@
-const CommonObject = require("./object");
+const Handler = require("./handler");
 
-class CommonController extends CommonObject {
-  static asyncHandler(fn) {
-    return function (req, res, next) {
-      fn(req, res, next).catch(next);
-    };
-  }
+class Controller extends Handler {
+  arrayQuery(value) {
+    if (!value) return;
 
-  asyncHandler(fn) {
-    return CommonController.asyncHandler(fn);
+    return Array.isArray(value) ? value : [value];
   }
 }
 
-module.exports = CommonController;
+module.exports = Controller;
