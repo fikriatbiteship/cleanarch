@@ -3,7 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const wireRouter = require("./router");
+const builder = require("./builder");
 const middleware = require("./middleware");
 
 module.exports = async () => {
@@ -13,7 +13,7 @@ module.exports = async () => {
   app.use(cors());
   app.use(express.json({ limit: "50mb" }));
   app.use(middleware.validateRawRequestBody);
-  await wireRouter(app);
+  await builder(app);
   app.use(middleware.onLost);
   app.use(middleware.onError);
 

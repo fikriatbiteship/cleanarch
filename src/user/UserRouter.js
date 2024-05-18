@@ -1,6 +1,8 @@
 const Router = require("../common/Router");
 const UserController = require("./UserController");
 const UserMiddleware = require("./UserMiddleware");
+const LoginRequest = require("./requests/LoginRequest");
+const RegisterRequest = require("./requests/RegisterRequest");
 
 class UserRouter extends Router {
   /**
@@ -17,8 +19,8 @@ class UserRouter extends Router {
   }
 
   init() {
-    this.router.post("/v1/auth/login", this.userController.login);
-    this.router.post("/v1/auth/register", this.userController.register);
+    this.router.post("/v1/auth/login", this.mapRequest(LoginRequest), this.userController.login);
+    this.router.post("/v1/auth/register", this.mapRequest(RegisterRequest), this.userController.register);
     this.router.get("/v1/auth/whoami", this.userMiddleware.authorize, this.userController.whoami);
   }
 }

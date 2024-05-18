@@ -1,10 +1,13 @@
 const Value = require("../../common/Value");
-const InvalidTaskStatusError = require("../errors/InvalidTaskStatusError");
 
 class TaskStatus extends Value {
-  static Todo = new TaskStatus("todo");
-  static Ongoing = new TaskStatus("ongoing");
-  static Done = new TaskStatus("done");
+  static Todo = new TaskStatus("TODO");
+  static Ongoing = new TaskStatus("ONGOING");
+  static Done = new TaskStatus("DONE");
+
+  static values() {
+    return [TaskStatus.Todo.value, TaskStatus.Ongoing.value, TaskStatus.Done.value];
+  }
 
   constructor(status) {
     super();
@@ -13,7 +16,7 @@ class TaskStatus extends Value {
   }
 
   valid() {
-    return [TaskStatus.Todo.value, TaskStatus.Ongoing.value, TaskStatus.Done.value].includes(this.value);
+    return this.constructor.values.includes(this.value);
   }
 
   equals(other) {

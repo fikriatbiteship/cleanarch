@@ -22,10 +22,7 @@ class UserController extends Controller {
   }
 
   register = this.asyncHandler(async (req, res) => {
-    const params = new RegisterParams({
-      username: req.body["username"],
-      password: req.body["password"],
-    });
+    const params = RegisterParams.fromRequest(req.data);
 
     const result = await this.registerService.call(params);
 
@@ -33,11 +30,7 @@ class UserController extends Controller {
   });
 
   login = this.asyncHandler(async (req, res) => {
-    const params = new LoginParams({
-      username: req.body["username"],
-      password: req.body["password"],
-    });
-
+    const params = LoginParams.fromRequest(req.data);
     const result = await this.loginService.call(params);
 
     return res.status(201).json(this.userView.login(result));

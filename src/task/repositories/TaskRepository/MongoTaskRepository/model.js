@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Task = require("../../../Entity/Task");
+const TaskStatus = require("../../../Values/TaskStatus");
 
 const taskSchema = new mongoose.Schema(
   {
@@ -8,13 +9,12 @@ const taskSchema = new mongoose.Schema(
     },
     name: {
       type: String,
-      unique: true,
       required: true,
     },
     status: {
       type: String,
       required: true,
-      enum: ["TODO", "IN_PROGRESS", "DONE"],
+      enum: TaskStatus.values(),
     },
     userId: {
       type: mongoose.SchemaTypes.UUID,
@@ -29,7 +29,7 @@ taskSchema.methods.toEntity = function () {
   return new Task({
     id: this.id,
     name: this.name,
-    status: this.status,
+    status: new TaskStatus(this.status),
     userId: this.userId,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
