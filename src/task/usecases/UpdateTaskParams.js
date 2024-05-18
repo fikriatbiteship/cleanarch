@@ -1,5 +1,5 @@
-const Params = require("../../common/params");
-const TaskStatus = require("../values/TaskStatus");
+const Params = require("../../common/Params");
+const TaskStatus = require("../Values/TaskStatus");
 
 class UpdateTaskParams extends Params {
   /**

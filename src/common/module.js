@@ -1,34 +1,13 @@
-const UserMiddleware = require("../user/UserMiddleware");
-const SessionManager = require("../user/manager/SessionManager");
-const MongoUserRepository = require("../user/repositories/UserRepository/MongoUserRepository");
-const AuthorizeService = require("../user/usecases/AuthorizeService");
+const Dependency = require("../utils/dependency");
 const NotImplementedError = require("./errors/NotImplementedError");
-const Object = require("./object");
+const Object = require("./Object");
 
 class Module extends Object {
-  wireSecurityModules() {
-    this.sessionManager = new SessionManager();
-    this.userRepository = new MongoUserRepository();
-
-    this.authorizationService = new AuthorizeService({
-      userRepository: this.userRepository,
-      sessionManager: this.sessionManager,
-    });
-
-    this.userMiddleware = new UserMiddleware({
-      authorizeService: this.authorizationService,
-    });
-  }
-
-  wire() {
-    throw new NotImplementedError();
-  }
-
-  registerListener() {
-    throw new NotImplementedError();
-  }
-
-  registerRouter() {
+  /**
+   * Wire dependencies
+   * @param {Dependency} deps
+   */
+  wire(deps) {
     throw new NotImplementedError();
   }
 }

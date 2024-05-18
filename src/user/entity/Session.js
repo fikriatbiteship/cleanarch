@@ -1,4 +1,4 @@
-const Entity = require("../../common/entity");
+const Entity = require("../../common/Entity");
 
 class Session extends Entity {
   constructor({ accessToken, refreshToken }) {

@@ -1,8 +1,8 @@
-const UseCase = require("../../common/usecase");
+const UseCase = require("../../common/UseCase");
 const TaskNotFoundError = require("../errors/TaskNotFoundError");
 const TaskRepository = require("../repositories/TaskRepository");
-const IdIsSpecification = require("../specifications/IdIsSpecification");
-const OwnerIsSpecification = require("../specifications/OwnerIsSpecification");
+const IdIsSpecification = require("../Specifications/IdIsSpecification");
+const OwnerIsSpecification = require("../Specifications/OwnerIsSpecification");
 const DeleteTaskParams = require("./DeleteTaskParams");
 const DeleteTaskResult = require("./DeleteTaskResult");
 

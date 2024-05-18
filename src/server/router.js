@@ -1,22 +1,37 @@
 const fs = require("fs");
 const path = require("path");
-const express = require("express");
-const router = express.Router();
 const logger = require("../../lib/logger");
-const Module = require("../common/module");
+const Module = require("../common/Module");
+const Dependency = require("../utils/dependency");
+const HTTPModule = require("../common/module/HTTPModule");
 
 const srcDir = path.join(__dirname, "..");
-fs.readdirSync(srcDir).forEach((modDir) => {
-  const modPath = path.join(srcDir, modDir, "index.js");
-  if (!fs.existsSync(modPath)) return;
 
-  const _Module = require(modPath);
-  if (!(_Module.prototype instanceof Module)) return;
+/**
+ * Route express application
+ * @param {import('express').Application} app
+ * @param {Dependency} deps
+ */
+module.exports = async (app, deps = new Dependency()) => {
+  const mods = new Set();
+  fs.readdirSync(srcDir).forEach((modDir) => {
+    const modPath = path.join(srcDir, modDir, "index.js");
+    if (!fs.existsSync(modPath)) return;
 
-  const mod = new _Module();
-  mod.registerRouter(router);
+    const _Module = require(modPath);
+    if (!(_Module.prototype instanceof Module)) return;
 
-  logger.info("server/router:", "routes on module", `'${modDir}'`, "has been registered!");
-});
+    const mod = new _Module();
+    mod.wire(deps);
+    mods.add(mod);
+  });
 
-module.exports = router;
+  for (const mod of mods) {
+    if (mod instanceof HTTPModule) {
+      await mod.route(app);
+      logger.debug("Router:", "routes on", mod.constructor.name, "registered.");
+    }
+  }
+
+  return app;
+};

@@ -2,14 +2,14 @@ const AccessTokenInvalidError = require("../errors/AccessTokenInvalidError");
 const ApplicationError = require("../../common/errors/ApplicationError");
 const AuthorizeParams = require("./AuthorizeParams");
 const AuthorizeResult = require("./AuthorizeResult");
-const UseCase = require("../../common/usecase");
-const IdIsSpecification = require("../specifications/IdIsSpecification");
+const UseCase = require("../../common/UseCase");
+const IdIsSpecification = require("../Specifications/IdIsSpecification");
 const MissingAccessTokenError = require("../errors/MissingAccessTokenError");
 const MissingAuthorizedUserError = require("../errors/MissingAuthorizedUserError");
 const UserRepository = require("../repositories/UserRepository");
 const SessionManager = require("../manager/SessionManager");
-const Session = require("../entity/Session");
-const UsernameIsSpecification = require("../specifications/UsernameIsSpecification");
+const Session = require("../Entity/Session");
+const UsernameIsSpecification = require("../Specifications/UsernameIsSpecification");
 
 class AuthorizeService extends UseCase {
   /**

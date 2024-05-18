@@ -1,4 +1,4 @@
-const Handler = require("./handler");
+const Handler = require("./Handler");
 
 class Middleware extends Handler {}
 

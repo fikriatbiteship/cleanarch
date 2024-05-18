@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Manager = require("../../common/manager/Manager");
-const User = require("../entity/User");
-const Session = require("../entity/Session");
-const AccessTokenClaim = require("../entity/AccessTokenClaim");
+const User = require("../Entity/User");
+const Session = require("../Entity/Session");
+const AccessTokenClaim = require("../Entity/AccessTokenClaim");
 
 class SessionManager extends Manager {
   constructor() {

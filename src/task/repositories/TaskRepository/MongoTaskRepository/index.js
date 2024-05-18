@@ -1,17 +1,17 @@
 const TaskRepository = require("../");
 const TaskModel = require("./model");
-const Task = require("../../../entity/Task");
-const Specification = require("../../../../common/specification");
-const IdIsSpecification = require("../../../specifications/IdIsSpecification");
-const OwnerIsSpecification = require("../../../specifications/OwnerIsSpecification");
-const StatusIsSpecification = require("../../../specifications/StatusIsSpecification");
-const NameIsSpecification = require("../../../specifications/NameIsSpecification");
-const NameLikeSpecification = require("../../../specifications/NameLikeSpecification");
-const NameStartsWithSpecification = require("../../../specifications/NameStartsWithSpecification");
-const NameEndsWithSpecification = require("../../../specifications/NameEndsWithSpecification");
-const StatusInSpecification = require("../../../specifications/StatusInSpecification");
-const StatusNotSpecification = require("../../../specifications/StatusNotSpecification");
-const StatusNotInSpecification = require("../../../specifications/StatusNotInSpecification");
+const Task = require("../../../Entity/Task");
+const Specification = require("../../../../common/Specification");
+const IdIsSpecification = require("../../../Specifications/IdIsSpecification");
+const OwnerIsSpecification = require("../../../Specifications/OwnerIsSpecification");
+const StatusIsSpecification = require("../../../Specifications/StatusIsSpecification");
+const NameIsSpecification = require("../../../Specifications/NameIsSpecification");
+const NameLikeSpecification = require("../../../Specifications/NameLikeSpecification");
+const NameStartsWithSpecification = require("../../../Specifications/NameStartsWithSpecification");
+const NameEndsWithSpecification = require("../../../Specifications/NameEndsWithSpecification");
+const StatusInSpecification = require("../../../Specifications/StatusInSpecification");
+const StatusNotSpecification = require("../../../Specifications/StatusNotSpecification");
+const StatusNotInSpecification = require("../../../Specifications/StatusNotInSpecification");
 
 class MongoTaskRepository extends TaskRepository {
   /**

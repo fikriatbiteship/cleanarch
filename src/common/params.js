@@ -1,4 +1,4 @@
-const Object = require("./object");
+const Object = require("./Object");
 
 class Params extends Object {}
 

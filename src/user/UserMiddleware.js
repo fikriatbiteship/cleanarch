@@ -1,11 +1,11 @@
-const Middleware = require("../common/middleware");
+const Middleware = require("../common/Middleware");
 const AuthorizeParams = require("./usecases/AuthorizeParams");
 const AuthorizeService = require("./usecases/AuthorizeService");
 
 class UserMiddleware extends Middleware {
   /**
    * Creates an instance of UserController.
-   * @param {Object} deps - the dependency of user middleware.
+   * @param {Object} deps - the dependency of user Middleware.
    * @param {AuthorizeService} deps.authorizeService - Authorization business logic.
    */
   constructor(deps) {

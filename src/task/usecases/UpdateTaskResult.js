@@ -1,5 +1,5 @@
-const Result = require("../../common/result");
-const Task = require("../entity/Task");
+const Result = require("../../common/Result");
+const Task = require("../Entity/Task");
 
 class UpdateTaskResult extends Result {
   /**

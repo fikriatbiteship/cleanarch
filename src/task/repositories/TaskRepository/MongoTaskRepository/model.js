@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Task = require("../../../entity/Task");
+const Task = require("../../../Entity/Task");
 
 const taskSchema = new mongoose.Schema(
   {

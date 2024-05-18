@@ -1,9 +1,9 @@
-const Object = require("./object");
-const Specification = require("./specification");
+const Object = require("./Object");
+const Specification = require("./Specification");
 
 class Query extends Object {
   /**
-   * Create query object to be used to call repository.
+   * Create query Object to be used to call repository.
    * @param {Object} params
    * @param {Specification[]} params.specs
    * @param {string} params.sort
@@ -11,7 +11,7 @@ class Query extends Object {
    * @param {offset} params.offset
    */
   constructor(params) {
-    super()
+    super();
 
     this.specs = params.specs;
     this.sort = params.sort;

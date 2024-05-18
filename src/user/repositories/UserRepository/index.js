@@ -1,8 +1,8 @@
 const NotImplementedError = require("../../../common/errors/NotImplementedError");
-const Repository = require("../../../common/repository");
-const User = require("../../entity/User");
-const Specification = require("../../../common/specification");
-const Query = require("../../../common/query");
+const Repository = require("../../../common/Repository");
+const User = require("../../Entity/User");
+const Specification = require("../../../common/Specification");
+const Query = require("../../../common/Query");
 
 class UserRepository extends Repository {
   /**

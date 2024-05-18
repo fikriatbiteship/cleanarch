@@ -1,4 +1,4 @@
-const Value = require("../../common/value");
+const Value = require("../../common/Value");
 const InvalidTaskStatusError = require("../errors/InvalidTaskStatusError");
 
 class TaskStatus extends Value {

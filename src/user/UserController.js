@@ -1,4 +1,4 @@
-const Controller = require("../common/controller");
+const Controller = require("../common/Controller");
 const UserView = require("./UserView");
 const LoginParams = require("./usecases/LoginParams");
 const LoginService = require("./usecases/LoginService");
@@ -8,7 +8,7 @@ const RegisterService = require("./usecases/RegisterService");
 class UserController extends Controller {
   /**
    * Creates an instance of UserController.
-   * @param {Object} deps - the dependency of user controller.
+   * @param {Object} deps - the dependency of user Controller.
    * @param {UserView} deps.userView - User view.
    * @param {RegisterService} deps.registerService - Register business logic.
    * @param {LoginService} deps.loginService - Login business logic.

@@ -2,7 +2,7 @@ const CreateTaskResult = require("./usecases/CreateTaskResult");
 const GetTaskResult = require("./usecases/GetTaskResult");
 const ListTasksResult = require("./usecases/ListTasksResult");
 const UpdateTaskResult = require("./usecases/UpdateTaskResult");
-const View = require("../common/view");
+const View = require("../common/View");
 
 class TaskView extends View {
   /**

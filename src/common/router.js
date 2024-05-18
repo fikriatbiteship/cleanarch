@@ -1,5 +1,5 @@
 const express = require("express");
-const Object = require("./object");
+const Object = require("./Object");
 
 class Router extends Object {
   constructor() {

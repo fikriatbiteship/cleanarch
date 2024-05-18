@@ -1,4 +1,4 @@
-const Router = require("../common/router");
+const Router = require("../common/Router");
 const UserController = require("./UserController");
 const UserMiddleware = require("./UserMiddleware");
 

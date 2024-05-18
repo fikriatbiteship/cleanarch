@@ -1,8 +1,8 @@
-const Specification = require("../../common/specification");
+const Specification = require("../../common/Specification");
 
 class NameStartsWithSpecification extends Specification {
   constructor(value) {
-    super()
+    super();
 
     this.nameStartsWith = value;
   }

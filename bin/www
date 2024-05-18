@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// require("../config/initializers");
+require("../config/initializers");
 
 const mongoose = require("mongoose");
 const debug = require("debug")("biteship-shield-node:server");
@@ -8,66 +8,68 @@ const http = require("http");
 // const config = require("../config");
 // const Writer = require("../src/infra/nsq/writer");
 const logger = require("../lib/logger");
-const expressServer = require("../src/server");
+const createServer = require("../src/server");
 
-/**
- * Get port from environment and store in Express.
- */
+createServer().then((expressServer) => {
+  /**
+   * Get port from environment and store in Express.
+   */
 
-const port = normalizePort(8081);
-expressServer.set("port", port);
+  const port = normalizePort(8081);
+  expressServer.set("port", port);
 
-/**
- * Create HTTP server.
- */
+  /**
+   * Create HTTP server.
+   */
 
-const server = http.createServer(expressServer);
+  const server = http.createServer(expressServer);
 
-/**
- * Graceful shutdown
- */
-process.on("SIGINT", () => {
-  logger.info("process:", "SIGINT signal received!");
-  logger.info("server:", "Gracefully shutdown...");
+  /**
+   * Graceful shutdown
+   */
+  process.on("SIGINT", () => {
+    logger.info("Process:", "SIGINT signal received!");
+    logger.info("HTTPServer:", "Gracefully shutdown...");
 
-  server.close(() => {
-    logger.info("server:", "successfully terminated!");
-    process.exit(0);
-  });
-});
-
-process.on("unhandledRejection", async (reason, promise) => {
-  try {
-    logger.error("unhandledRejection:", reason.message);
-    logger.error("unhandledRejection:", reason.stack);
-
-    if (reason.response?.config) {
-      const requestConfig = reason.response?.config;
-      logger.error("unhandledRejection:", requestConfig.method.toUpperCase(), requestConfig.url);
-    }
-  } catch (error) {
-    logger.error("unhandledRejection:", error.message);
-    logger.error("unhandledRejection:", error.stack);
-  } finally {
-    process.exit(1);
-  }
-});
-
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => {
-    logger.info("mongodb:", "ready!");
-    server.listen(port, () => {
-      logger.info("server:", `Listening on port ${port}`);
+    server.close(() => {
+      logger.info("HTTPServer:", "successfully terminated!");
+      process.exit(0);
     });
-  })
-  .catch((err) => {
-    logger.error("mongodb:", "cannot connect to database with error:", err.message);
   });
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+  process.on("unhandledRejection", async (reason, promise) => {
+    try {
+      logger.error("UnhandledRejection:", reason.message);
+      logger.error("UnhandledRejection:", reason.stack);
+
+      if (reason.response?.config) {
+        const requestConfig = reason.response?.config;
+        logger.error("UnhandledRejection:", requestConfig.method.toUpperCase(), requestConfig.url);
+      }
+    } catch (error) {
+      logger.error("UnhandledRejection:", error.message);
+      logger.error("UnhandledRejection:", error.stack);
+    } finally {
+      process.exit(1);
+    }
+  });
+
+  mongoose
+    .connect(process.env.DATABASE_URL)
+    .then(() => {
+      logger.info("Mongo:", "connection initialized.");
+      server.listen(port, () => {
+        logger.info("HTTPServer:", `Listening on port ${port}`);
+      });
+    })
+    .catch((err) => {
+      logger.error("Mongo:", "cannot connect to database with error:", err.message);
+    });
+
+  /**
+   * Listen on provided port, on all network interfaces.
+   */
+});
 
 /**
  * Normalize a port into a number, string, or false.

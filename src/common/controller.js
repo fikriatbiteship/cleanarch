@@ -1,4 +1,4 @@
-const Handler = require("./handler");
+const Handler = require("./Handler");
 
 class Controller extends Handler {
   arrayQuery(value) {

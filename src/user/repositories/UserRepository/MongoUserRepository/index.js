@@ -1,9 +1,9 @@
-const IdIsSpecification = require("../../../specifications/IdIsSpecification");
-const UsernameIsSpecification = require("../../../specifications/UsernameIsSpecification");
+const IdIsSpecification = require("../../../Specifications/IdIsSpecification");
+const UsernameIsSpecification = require("../../../Specifications/UsernameIsSpecification");
 const UserRepository = require("../");
 const UserModel = require("./model");
-const User = require("../../../entity/User");
-const Specification = require("../../../../common/specification");
+const User = require("../../../Entity/User");
+const Specification = require("../../../../common/Specification");
 
 class MongoUserRepository extends UserRepository {
   /**

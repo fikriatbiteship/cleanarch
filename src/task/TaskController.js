@@ -1,4 +1,4 @@
-const Controller = require("../common/controller");
+const Controller = require("../common/Controller");
 const CreateTaskParams = require("./usecases/CreateTaskParams");
 const CreateTaskService = require("./usecases/CreateTaskService");
 const GetTaskParams = require("./usecases/GetTaskParams");
@@ -7,7 +7,7 @@ const ListTasksParams = require("./usecases/ListTasksParams");
 const ListTasksService = require("./usecases/ListTasksService");
 const UpdateTaskParams = require("./usecases/UpdateTaskParams");
 const UpdateTaskService = require("./usecases/UpdateTaskService");
-const TaskStatus = require("./values/TaskStatus");
+const TaskStatus = require("./Values/TaskStatus");
 const TaskView = require("./TaskView");
 const DeleteTaskService = require("./usecases/DeleteTaskService");
 const DeleteTaskParams = require("./usecases/DeleteTaskParams");
@@ -15,7 +15,7 @@ const DeleteTaskParams = require("./usecases/DeleteTaskParams");
 class TaskController extends Controller {
   /**
    * Creates an instance of UserController.
-   * @param {Object} deps - the dependency of user controller.
+   * @param {Object} deps - the dependency of user Controller.
    * @param {CreateTaskService} deps.createTaskService - object that implements create task service business logic.
    * @param {UpdateTaskService} deps.updateTaskService - object that implements update task service business logic.
    * @param {GetTaskService} deps.getTaskService - object that implements get task service business logic.

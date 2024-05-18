@@ -1,5 +1,5 @@
-const Result = require("../../common/result");
-const Task = require("../entity/Task");
+const Result = require("../../common/Result");
+const Task = require("../Entity/Task");
 
 class GetTaskResult extends Result {
   /**
@@ -8,7 +8,7 @@ class GetTaskResult extends Result {
    * @param {Task} object.task
    */
   constructor({ task }) {
-    super()
+    super();
 
     this.task = task;
   }

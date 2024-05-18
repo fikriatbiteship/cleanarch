@@ -1,4 +1,4 @@
-const Params = require("../../common/params");
+const Params = require("../../common/Params");
 
 class GetTaskParams extends Params {
   /**
@@ -8,7 +8,7 @@ class GetTaskParams extends Params {
    * @param {string} object.userId
    */
   constructor({ id, userId }) {
-    super()
+    super();
 
     this.id = id;
     this.userId = userId;

@@ -1,4 +1,4 @@
-const Params = require("../../common/params");
+const Params = require("../../common/Params");
 
 class AuthorizeParams extends Params {
   constructor({ accessToken }) {

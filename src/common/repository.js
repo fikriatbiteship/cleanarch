@@ -1,17 +1,17 @@
 const { Query } = require("mongoose");
-const Object = require("./object");
-const Entity = require("./entity");
-const Specification = require("./specification");
+const Object = require("./Object");
+const Entity = require("./Entity");
+const Specification = require("./Specification");
 const NotImplementedError = require("./errors/NotImplementedError");
 
 class Repository extends Object {
   /**
-   * Find an entity
+   * Find an Entity
    * @param {...Specification} specs
    * @returns {Promise<Entity[]>}
    */
   findOne(specs) {
-    throw new NotImplementedError()
+    throw new NotImplementedError();
   }
 
   /**
@@ -20,7 +20,7 @@ class Repository extends Object {
    * @returns {Promise<Entity>}
    */
   find(query) {
-    throw new NotImplementedError()
+    throw new NotImplementedError();
   }
 
   /**
@@ -29,25 +29,25 @@ class Repository extends Object {
    * @returns {Promise<number>}
    */
   size(specs) {
-    throw new NotImplementedError()
+    throw new NotImplementedError();
   }
 
   /**
-   * Save an entity.
-   * @param {Entity} entity
+   * Save an Entity.
+   * @param {Entity} Entity
    * @returns {Promise<boolean>}
    */
-  save(entity) {
-    throw new NotImplementedError()
+  save(Entity) {
+    throw new NotImplementedError();
   }
 
   /**
-   * Delete an entity.
-   * @param {Entity} entity
+   * Delete an Entity.
+   * @param {Entity} Entity
    * @returns {Promise<boolean>}
    */
-  delete(entity) {
-    throw new NotImplementedError()
+  delete(Entity) {
+    throw new NotImplementedError();
   }
 }
 

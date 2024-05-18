@@ -1,8 +1,8 @@
-const Specification = require("../../common/specification");
+const Specification = require("../../common/Specification");
 
 class NameIsSpecification extends Specification {
   constructor(name) {
-    super()
+    super();
 
     this.name = name;
   }

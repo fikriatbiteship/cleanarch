@@ -1,4 +1,4 @@
-const Entity = require("../../common/entity");
+const Entity = require("../../common/Entity");
 const User = require("./User");
 
 class AccessTokenClaim extends Entity {

@@ -1,4 +1,4 @@
-const Result = require("../../common/result");
+const Result = require("../../common/Result");
 
 class RegisterResult extends Result {
   constructor({ user }) {

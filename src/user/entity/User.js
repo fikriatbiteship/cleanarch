@@ -1,4 +1,4 @@
-const Entity = require("../../common/entity");
+const Entity = require("../../common/Entity");
 const uuid = require("uuid");
 
 class User extends Entity {

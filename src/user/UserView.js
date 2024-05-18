@@ -1,4 +1,4 @@
-const View = require("../common/view");
+const View = require("../common/View");
 const LoginResult = require("./usecases/LoginResult");
 const RegisterResult = require("./usecases/RegisterResult");
 

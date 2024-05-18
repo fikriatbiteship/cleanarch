@@ -1,8 +1,8 @@
-const Params = require("../../common/params");
+const Params = require("../../common/Params");
 
 class CreateTaskParams extends Params {
   constructor({ name, userId }) {
-    super()
+    super();
 
     this.name = name;
     this.userId = userId;

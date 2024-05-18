@@ -1,5 +1,5 @@
-const Result = require("../../common/result");
-const Session = require("../entity/Session");
+const Result = require("../../common/Result");
+const Session = require("../Entity/Session");
 
 class LoginResult extends Result {
   /**

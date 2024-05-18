@@ -1,58 +1,84 @@
-const CreateTaskService = require("./usecases/CreateTaskService");
-const GetTaskService = require("./usecases/GetTaskService");
-const Module = require("../common/module");
-const MongoTaskRepository = require("./repositories/TaskRepository/MongoTaskRepository");
+const HTTPModule = require("../common/module/HTTPModule");
+const Dependency = require("../utils/dependency");
 const TaskController = require("./TaskController");
 const TaskRouter = require("./TaskRouter");
 const TaskView = require("./TaskView");
+const MongoTaskRepository = require("./repositories/TaskRepository/MongoTaskRepository");
+const CreateTaskService = require("./usecases/CreateTaskService");
+const DeleteTaskService = require("./usecases/DeleteTaskService");
+const GetTaskService = require("./usecases/GetTaskService");
 const ListTasksService = require("./usecases/ListTasksService");
 const UpdateTaskService = require("./usecases/UpdateTaskService");
-const DeleteTaskService = require("./usecases/DeleteTaskService");
 
-class TaskModule extends Module {
-  wire() {
-    this.wireSecurityModules();
-    this.taskRepository = new MongoTaskRepository();
-
-    this.createTaskService = new CreateTaskService({
-      taskRepository: this.taskRepository,
+class TaskModule extends HTTPModule {
+  /**
+   * Wire dependencies
+   * @param {Dependency} deps
+   */
+  wire(deps) {
+    deps.set("taskRepository", async () => {
+      return new MongoTaskRepository();
     });
 
-    this.getTaskService = new GetTaskService({
-      taskRepository: this.taskRepository,
+    deps.set("createTaskService", async (c) => {
+      return new CreateTaskService({
+        taskRepository: await c.get("taskRepository"),
+      });
     });
 
-    this.listTasksService = new ListTasksService({
-      taskRepository: this.taskRepository,
+    deps.set("getTaskService", async (c) => {
+      return new GetTaskService({
+        taskRepository: await c.get("taskRepository"),
+      });
     });
 
-    this.updateTaskService = new UpdateTaskService({
-      taskRepository: this.taskRepository,
+    deps.set("updateTaskService", async (c) => {
+      return new UpdateTaskService({
+        taskRepository: await c.get("taskRepository"),
+      });
     });
 
-    this.deleteTaskService = new DeleteTaskService({
-      taskRepository: this.taskRepository,
+    deps.set("deleteTaskService", async (c) => {
+      return new DeleteTaskService({
+        taskRepository: await c.get("taskRepository"),
+      });
     });
 
-    this.taskView = new TaskView();
-
-    this.taskController = new TaskController({
-      createTaskService: this.createTaskService,
-      updateTaskService: this.updateTaskService,
-      deleteTaskService: this.deleteTaskService,
-      getTaskService: this.getTaskService,
-      listTasksService: this.listTasksService,
-      taskView: this.taskView,
+    deps.set("listTasksService", async (c) => {
+      return new ListTasksService({
+        taskRepository: await c.get("taskRepository"),
+      });
     });
+
+    deps.set("taskView", async (c) => {
+      return new TaskView();
+    });
+
+    deps.set("taskController", async (c) => {
+      return new TaskController({
+        createTaskService: await c.get("createTaskService"),
+        updateTaskService: await c.get("updateTaskService"),
+        getTaskService: await c.get("getTaskService"),
+        deleteTaskService: await c.get("deleteTaskService"),
+        listTasksService: await c.get("listTasksService"),
+        taskView: await c.get("taskView"),
+      });
+    });
+
+    deps.set("taskRouter", async (c) => {
+      return new TaskRouter({
+        taskController: await c.get("taskController"),
+        userMiddleware: await c.get("userMiddleware"),
+      });
+    });
+
+    this.deps = deps;
   }
 
-  registerRouter(app) {
-    this.wire();
-    this.taskRouter = new TaskRouter({
-      taskController: this.taskController,
-      userMiddleware: this.userMiddleware,
+  async route(app) {
+    return this.deps.get("taskRouter").then((taskRouter) => {
+      taskRouter.register(app);
     });
-    this.taskRouter.register(app);
   }
 }
 

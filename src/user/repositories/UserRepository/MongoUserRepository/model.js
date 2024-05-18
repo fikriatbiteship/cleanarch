@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const UserEntity = require("../../../entity/User");
+const UserEntity = require("../../../Entity/User");
 
 const userSchema = new mongoose.Schema(
   {
