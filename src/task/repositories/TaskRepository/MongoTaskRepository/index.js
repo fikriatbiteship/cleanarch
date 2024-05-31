@@ -1,6 +1,6 @@
 const TaskRepository = require("../");
 const TaskModel = require("./model");
-const Task = require("../../../Entity/Task");
+const Task = require("../../../entity/Task");
 const Specification = require("../../../../common/Specification");
 const IdIsSpecification = require("../../../Specifications/IdIsSpecification");
 const OwnerIsSpecification = require("../../../Specifications/OwnerIsSpecification");

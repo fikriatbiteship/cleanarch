@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Task = require("../../../Entity/Task");
-const TaskStatus = require("../../../Values/TaskStatus");
+const Task = require("../../../entity/Task");
+const TaskStatus = require("../../../values/TaskStatus");
 
 const taskSchema = new mongoose.Schema(
   {

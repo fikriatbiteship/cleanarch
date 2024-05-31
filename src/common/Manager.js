@@ -1,4 +1,4 @@
-const Object = require("../Object");
+const Object = require("./Object");
 
 class Manager extends Object {}
 

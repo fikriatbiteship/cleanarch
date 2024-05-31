@@ -1,5 +1,5 @@
 const UseCase = require("../../common/UseCase");
-const User = require("../Entity/User");
+const User = require("../entity/User");
 const UsernameIsSpecification = require("../Specifications/UsernameIsSpecification");
 const UserRepository = require("../repositories/UserRepository");
 const UsernameAlreadyTakenError = require("../errors/UsernameAlreadyTakenError");

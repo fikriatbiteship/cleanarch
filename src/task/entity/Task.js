@@ -1,6 +1,6 @@
 const Entity = require("../../common/Entity");
 const uuid = require("uuid");
-const TaskStatus = require("../Values/TaskStatus");
+const TaskStatus = require("../values/TaskStatus");
 
 class Task extends Entity {
   /**

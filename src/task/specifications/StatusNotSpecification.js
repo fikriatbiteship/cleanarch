@@ -1,5 +1,5 @@
 const Specification = require("../../common/Specification");
-const TaskStatus = require("../Values/TaskStatus");
+const TaskStatus = require("../values/TaskStatus");
 
 class StatusNotSpecification extends Specification {
   /**
