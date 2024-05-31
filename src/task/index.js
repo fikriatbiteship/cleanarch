@@ -4,6 +4,7 @@ const TaskController = require("./TaskController");
 const TaskRouter = require("./TaskRouter");
 const TaskView = require("./TaskView");
 const MongoTaskRepository = require("./repositories/TaskRepository/MongoTaskRepository");
+const MongoTaskSummaryRepository = require("./repositories/TaskSummaryRepository/MongoTaskSummaryRepository");
 const CreateTaskService = require("./usecases/CreateTaskService");
 const DeleteTaskService = require("./usecases/DeleteTaskService");
 const GetTaskService = require("./usecases/GetTaskService");
@@ -20,9 +21,15 @@ class TaskModule extends HTTPModule {
       return new MongoTaskRepository();
     });
 
+    deps.set("taskSummaryRepository", async () => {
+      return new MongoTaskSummaryRepository();
+    });
+
+
     deps.set("createTaskService", async (c) => {
       return new CreateTaskService({
         taskRepository: await c.get("taskRepository"),
+        taskSummaryRepository: await c.get("taskSummaryRepository"),
       });
     });
 

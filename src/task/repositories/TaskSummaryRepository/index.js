@@ -1,32 +1,32 @@
 const NotImplementedError = require("../../../common/errors/NotImplementedError");
 const Repository = require("../../../common/Repository");
-const User = require("../../entity/User");
+const TaskSummary = require("../../entity/TaskSummary");
 const Specification = require("../../../common/Specification");
 const Query = require("../../../common/Query");
 
-class UserRepository extends Repository {
+class TaskSummaryRepository extends Repository {
   /**
-   * Find an user
+   * Find an taskSummary
    * @param {Specification[]} specs
    * @param {Context} [ctx]
-   * @returns {Promise<User[]>}
+   * @returns {Promise<TaskSummary[]>}
    */
   findOne(specs, ctx) {
     throw new NotImplementedError();
   }
 
   /**
-   * Find users
+   * Find taskSummaries
    * @param {Query} query
    * @param {Context} [ctx]
-   * @returns {Promise<User>}
+   * @returns {Promise<TaskSummary>}
    */
   find(query, ctx) {
     throw new NotImplementedError();
   }
 
   /**
-   * Get size of users
+   * Get size of taskSummaries
    * @param {Specification[]} specs
    * @param {Context} [ctx]
    * @returns {Promise<number>}
@@ -36,24 +36,24 @@ class UserRepository extends Repository {
   }
 
   /**
-   * Save an user.
-   * @param {User} user
+   * Save an taskSummary.
+   * @param {TaskSummary} taskSummary
    * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  save(user, ctx) {
+  save(taskSummary, ctx) {
     throw new NotImplementedError();
   }
 
   /**
-   * Delete an user.
-   * @param {User} user
+   * Delete an taskSummary.
+   * @param {TaskSummary} taskSummary
    * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  delete(user, ctx) {
+  delete(taskSummary, ctx) {
     throw new NotImplementedError();
   }
 }
 
-module.exports = UserRepository;
+module.exports = TaskSummaryRepository;
