@@ -28,10 +28,10 @@ class DeleteTaskService extends UseCase {
    * @returns {Promise<DeleteTaskResult>}
    */
   async call(params) {
-    const task = await this.taskRepository.findOne(new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId));
+    const task = await this.taskRepository.findOne([new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId)]);
     if (!task) throw new TaskNotFoundError(params.id);
 
-    const taskSummary = this.taskSummaryRepository.findOne(new OwnerIsSpecification(params.userId))
+    const taskSummary = this.taskSummaryRepository.findOne([new OwnerIsSpecification(params.userId)])
     if (TaskStatus.Todo.equals(task.status)) taskSummary.todoCount = taskSummary.todoCount - 1;
     if (TaskStatus.Ongoing.equals(task.status)) taskSummary.ongoingCount = (await taskSummary).ongoingCount - 1;
     if (TaskStatus.Done.equals(task.status)) taskSummary.doneCount = (await taskSummary).doneCount - 1;

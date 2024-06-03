@@ -29,8 +29,8 @@ class UpdateTaskService extends UseCase {
    */
   async call(params) {
     const now = this.now();
-    const task = await this.taskRepository.findOne(new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId));
-    const taskSummary = await this.taskSummaryRepository.findOne(new OwnerIsSpecification(params.userId))
+    const task = await this.taskRepository.findOne([new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId)]);
+    const taskSummary = await this.taskSummaryRepository.findOne([new OwnerIsSpecification(params.userId)])
     if (!task) throw new TaskNotFoundError(params.id);
 
     if (params.name) task.name = params.name;

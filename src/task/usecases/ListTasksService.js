@@ -49,7 +49,7 @@ class ListTasksService extends UseCase {
     });
 
     const tasks = await this.taskRepository.find(query);
-    const size = await this.taskRepository.size(...specs);
+    const size = await this.taskRepository.size(specs);
 
     return new ListTasksResult({
       tasks,

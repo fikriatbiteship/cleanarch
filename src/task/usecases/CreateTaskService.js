@@ -37,7 +37,7 @@ class CreateTaskService extends UseCase {
       updatedAt: now,
     });
 
-    const taskSummary = (await this.taskSummaryRepository.findOne(new OwnerIsSpecification(params.userId))) ||
+    const taskSummary = (await this.taskSummaryRepository.findOne([new OwnerIsSpecification(params.userId)])) ||
       new TaskSummary({
         userId: params.userId,
         todoCount: 0,
