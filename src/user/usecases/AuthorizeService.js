@@ -39,7 +39,7 @@ class AuthorizeService extends UseCase {
         }),
       );
 
-      const user = await this.userRepository.findOne(new IdIsSpecification(claim.id), new UsernameIsSpecification(claim.sub));
+      const user = await this.userRepository.findOne([new IdIsSpecification(claim.id), new UsernameIsSpecification(claim.sub)]);
       if (!user) throw new MissingAuthorizedUserError();
 
       return new AuthorizeResult({ user });
