@@ -24,7 +24,7 @@ class GetTaskService extends UseCase {
    * @return {Promise<GetTaskResult>}
    */
   async call(params) {
-    const task = await this.taskRepository.findOne(new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId));
+    const task = await this.taskRepository.findOne([new IdIsSpecification(params.id), new OwnerIsSpecification(params.userId)]);
     if (!task) throw new TaskNotFoundError(params.id);
 
     return new GetTaskResult({

@@ -32,7 +32,7 @@ class LoginService extends UseCase {
    * @returns {Promise<LoginResult>}
    */
   async call(params) {
-    const user = await this.userRepository.findOne(new UserNameIsSpecification(params.username));
+    const user = await this.userRepository.findOne([new UserNameIsSpecification(params.username)]);
 
     if (!user) throw new UsernameNotFoundError();
 

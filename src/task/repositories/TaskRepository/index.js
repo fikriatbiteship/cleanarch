@@ -1,6 +1,6 @@
 const NotImplementedError = require("../../../common/errors/NotImplementedError");
 const Repository = require("../../../common/Repository");
-const Task = require("../../Task/Task");
+const Task = require("../../entity/Task");
 const Specification = require("../../../common/Specification");
 const Query = require("../../../common/Query");
 

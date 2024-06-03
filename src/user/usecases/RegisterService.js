@@ -29,7 +29,7 @@ class RegisterService extends UseCase {
   async call(params) {
     const now = this.now();
 
-    const existingUser = await this.userRepository.findOne(new UsernameIsSpecification(params.username));
+    const existingUser = await this.userRepository.findOne([new UsernameIsSpecification(params.username)]);
 
     if (!!existingUser) throw new UsernameAlreadyTakenError();
 
