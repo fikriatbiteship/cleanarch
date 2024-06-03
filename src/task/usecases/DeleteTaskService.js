@@ -4,7 +4,7 @@ const TaskRepository = require("../repositories/TaskRepository");
 const TaskSummaryRepository = require("../repositories/TaskSummaryRepository");
 const IdIsSpecification = require("../Specifications/IdIsSpecification");
 const OwnerIsSpecification = require("../Specifications/OwnerIsSpecification");
-const TaskStatus = require("../Values/TaskStatus");
+const TaskStatus = require("../values/TaskStatus");
 const DeleteTaskParams = require("./DeleteTaskParams");
 const DeleteTaskResult = require("./DeleteTaskResult");
 

@@ -1,5 +1,5 @@
 const Request = require("../../common/Request");
-const TaskStatus = require("../Values/TaskStatus");
+const TaskStatus = require("../values/TaskStatus");
 
 class UpdateTaskRequest extends Request {
   static schema = {

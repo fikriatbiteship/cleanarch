@@ -1,10 +1,10 @@
 const UseCase = require("../../common/UseCase");
-const Task = require("../Entity/Task");
+const Task = require("../entity/Task");
 const TaskSummary = require("../entity/TaskSummary");
 const TaskRepository = require("../repositories/TaskRepository");
 const TaskSummaryRepository = require("../repositories/TaskSummaryRepository");
 const OwnerIsSpecification = require("../Specifications/OwnerIsSpecification");
-const TaskStatus = require("../Values/TaskStatus");
+const TaskStatus = require("../values/TaskStatus");
 const CreateTaskParams = require("./CreateTaskParams");
 const CreateTaskResult = require("./CreateTaskResult");
 

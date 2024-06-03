@@ -8,7 +8,7 @@ const MissingAccessTokenError = require("../errors/MissingAccessTokenError");
 const MissingAuthorizedUserError = require("../errors/MissingAuthorizedUserError");
 const UserRepository = require("../repositories/UserRepository");
 const SessionManager = require("../manager/SessionManager");
-const Session = require("../Entity/Session");
+const Session = require("../entity/Session");
 const UsernameIsSpecification = require("../Specifications/UsernameIsSpecification");
 
 class AuthorizeService extends UseCase {

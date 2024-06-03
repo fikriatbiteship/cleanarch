@@ -1,4 +1,4 @@
-const Manager = require("./Manager");
+const Manager = require("../Manager");
 const bcrypt = require("bcrypt");
 
 class HashManager extends Manager {
