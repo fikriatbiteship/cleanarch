@@ -1,3 +1,5 @@
+const Context = require("../../common/Context");
+const TransactionManager = require("../../common/manager/TransactionManager");
 const UseCase = require("../../common/UseCase");
 const Task = require("../entity/Task");
 const TaskSummary = require("../entity/TaskSummary");
@@ -14,12 +16,14 @@ class CreateTaskService extends UseCase {
    * @param {Object} deps
    * @param {TaskRepository} deps.taskRepository
    * @param {TaskSummaryRepository} deps.taskSummaryRepository
+   * @param {TransactionManager} deps.transactionManager
    */
   constructor(deps) {
     super();
 
     this.taskRepository = deps.taskRepository;
     this.taskSummaryRepository = deps.taskSummaryRepository;
+    this.transactionManager = deps.transactionManager;
   }
 
   /**
@@ -37,7 +41,8 @@ class CreateTaskService extends UseCase {
       updatedAt: now,
     });
 
-    const taskSummary = (await this.taskSummaryRepository.findOne([new OwnerIsSpecification(params.userId)])) ||
+    const taskSummary =
+      (await this.taskSummaryRepository.findOne([new OwnerIsSpecification(params.userId)])) ||
       new TaskSummary({
         userId: params.userId,
         todoCount: 0,
@@ -45,11 +50,12 @@ class CreateTaskService extends UseCase {
         doneCount: 0,
       });
 
-    await this.taskRepository.save(task);
+    taskSummary.todoCount++;
 
-    taskSummary.todoCount++
-
-    await this.taskSummaryRepository.save(taskSummary);
+    await this.transactionManager.call(async (ctx) => {
+      await this.taskRepository.save(task, ctx);
+      await this.taskSummaryRepository.save(taskSummary, ctx);
+    });
 
     return new CreateTaskResult({
       task,

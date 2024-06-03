@@ -12,16 +12,19 @@ const NameEndsWithSpecification = require("../../../Specifications/NameEndsWithS
 const StatusInSpecification = require("../../../Specifications/StatusInSpecification");
 const StatusNotSpecification = require("../../../Specifications/StatusNotSpecification");
 const StatusNotInSpecification = require("../../../Specifications/StatusNotInSpecification");
+const Context = require("../../../../common/Context");
 
 class MongoTaskRepository extends TaskRepository {
   /**
    * Find tasks
-   * @param {...Specification} specs
+   * @param {Specification} specs
+   * @param {Context} [ctx]
    * @returns {Promise<Task[]>}
    */
-  async findOne(...specs) {
+  async findOne(specs, ctx) {
     const mQuery = this._query(specs);
-    const task = await TaskModel.findOne(mQuery);
+    const taskQuery = TaskModel.findOne(mQuery);
+    const task = await (ctx?.has("trx") ? taskQuery.session(ctx.get("trx")) : taskQuery);
     if (!task) return null;
 
     return task.toEntity();
@@ -30,13 +33,15 @@ class MongoTaskRepository extends TaskRepository {
   /**
    * Find tasks
    * @param {Query} query
+   * @param {Context} [ctx]
    * @returns {Promise<Task[]>}
    */
-  async find(query) {
+  async find(query, ctx) {
     const mQuery = this._query(query.specs);
-    const tasks = await TaskModel.find(mQuery)
+    const tasksQuery = TaskModel.find(mQuery)
       .limit(query.limit || 10)
       .skip(query.offset || 0);
+    const tasks = await (ctx?.has("trx") ? tasksQuery.session(ctx.get("trx")) : tasksQuery);
 
     return tasks.map((task) => task.toEntity());
   }
@@ -44,9 +49,10 @@ class MongoTaskRepository extends TaskRepository {
   /**
    * Save task
    * @param {Task} task
+   * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  save(task) {
+  save(task, ctx) {
     return TaskModel.updateOne(
       { _id: task.id },
       {
@@ -59,27 +65,30 @@ class MongoTaskRepository extends TaskRepository {
           updatedAt: task.updatedAt,
         },
       },
-      { upsert: true },
+      { upsert: true, session: ctx?.get("trx") }
     );
   }
 
   /**
    * Get tasks size
-   * @param {...Specification} specs
+   * @param {Specification[]} specs
+   * @param {Context} [ctx]
    * @returns {Promise<number>}
    */
-  size(...specs) {
+  size(specs, ctx) {
     const query = this._query(specs);
-    return TaskModel.countDocuments(query);
+    const taskSizeQuery = TaskModel.countDocuments(query);
+    return ctx?.has("trx") ? taskSizeQuery.session(ctx.get("trx")) : taskSizeQuery;
   }
 
   /**
    * Delete task
    * @param {Task} task
+   * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  delete(task) {
-    return TaskModel.deleteOne({ _id: task.id });
+  delete(task, ctx) {
+    return TaskModel.deleteOne({ _id: task.id }, { session: ctx?.get("trx") });
   }
 
   _query(specs) {

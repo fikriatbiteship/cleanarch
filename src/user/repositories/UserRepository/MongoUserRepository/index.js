@@ -4,14 +4,16 @@ const UserRepository = require("../");
 const UserModel = require("./model");
 const User = require("../../../entity/User");
 const Specification = require("../../../../common/Specification");
+const Context = require("../../../../common/Context");
 
 class MongoUserRepository extends UserRepository {
   /**
    * Find a user
-   * @param {...Specification} specs
+   * @param {Specification[]} specs
+   * @param {Context} [ctx]
    * @returns {Promise<User>}
    */
-  async findOne(...specs) {
+  async findOne(specs, ctx) {
     const mQuery = this._query(specs);
     const user = await UserModel.findOne(mQuery);
     if (!user) return null;
@@ -22,9 +24,10 @@ class MongoUserRepository extends UserRepository {
   /**
    * Find users
    * @param {Query} query
+   * @param {Context} [ctx]
    * @returns {Promise<User[]>}
    */
-  async find(query) {
+  async find(query, ctx) {
     const mQuery = this._query(query.specs);
     const users = await UserModel.find(mQuery)
       .limit(query.limit || 10)
@@ -36,9 +39,10 @@ class MongoUserRepository extends UserRepository {
   /**
    * Save user
    * @param {User} user
+   * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  save(user) {
+  save(user, ctx) {
     return UserModel.updateOne(
       { _id: user.id },
       {
@@ -50,16 +54,17 @@ class MongoUserRepository extends UserRepository {
           updatedAt: user.updatedAt,
         },
       },
-      { upsert: true },
+      { upsert: true }
     );
   }
 
   /**
    * Delete user
    * @param {User} user
+   * @param {Context} [ctx]
    * @returns {Promise<boolean>}
    */
-  delete(user) {
+  delete(user, ctx) {
     return UserModel.deleteOne({ _id: user.id });
   }
 

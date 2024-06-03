@@ -30,6 +30,7 @@ class TaskModule extends HTTPModule {
       return new CreateTaskService({
         taskRepository: await c.get("taskRepository"),
         taskSummaryRepository: await c.get("taskSummaryRepository"),
+        transactionManager: await c.get("transactionManager")
       });
     });
 

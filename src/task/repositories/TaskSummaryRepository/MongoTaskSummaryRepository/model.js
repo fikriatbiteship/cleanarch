@@ -31,7 +31,7 @@ const taskSummarySchema = new mongoose.Schema(
 );
 
 taskSummarySchema.methods.toEntity = function () {
-  return new Task({
+  return new TaskSummary({
     id: this.id,
     todoCount: this.todoCount,
     ongoingCount: this.ongoingCount,
