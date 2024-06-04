@@ -1,5 +1,3 @@
-class Context extends Map {
-
-}
+class Context extends Map {}
 
 module.exports = Context;

@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const dotenv = require("dotenv");
+const dbDir = path.join(__dirname, "db", "sequelize")
+
+dotenv.config();
+
+if (!fs.existsSync(dbDir))
+  fs.mkdirSync(dbDir, { recursive: true });
+
+module.exports = {
+  config: path.join(dbDir, "config.js"),
+  "migrations-path": path.join(dbDir, "migrations"),
+  "models-path": path.join(dbDir, "models"),
+  "seeders-path": path.join(dbDir, "seeders"),
+}

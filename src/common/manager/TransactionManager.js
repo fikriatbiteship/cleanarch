@@ -1,8 +1,10 @@
 const Context = require("../Context");
 const Manager = require("../Manager");
-const mongoose = require("mongoose")
 
 class TransactionManager extends Manager {
+  constructor() {
+    super();
+  }
   /**
    * Wrap action into one transaction
    * @param {Function} block
@@ -10,16 +12,19 @@ class TransactionManager extends Manager {
    */
   async call(block) {
     const context = new Context();
-    const transaction = await mongoose.startSession();
-    transaction.startTransaction()
-    context.set("trx", transaction);
+
+    context.set("useTransaction", true);
+
     try {
-        await block(context)
-        await transaction.commitTransaction()
-        await transaction.endSession()
+      await block(context);
+
+      const sqlTransaction = context.get("sqlTransaction");
+      if (!!sqlTransaction) await sqlTransaction.commit();
     } catch (error) {
-        await transaction.abortTransaction()
-        throw error;
+      const sqlTransaction = context.get("sqlTransaction");
+      if (!!sqlTransaction) await sqlTransaction.rollback();
+
+      throw error;
     }
   }
 }

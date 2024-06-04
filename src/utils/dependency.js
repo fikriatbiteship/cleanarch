@@ -7,7 +7,7 @@ class Dependency {
   }
 
   set(name, factory) {
-    logger.debug("Dependency:", "register", name, "on dependency.");
+    logger.debug("Dependency:", "registering", name, "on dependency container");
 
     this.services.set(name, {
       factory,
@@ -27,7 +27,7 @@ class Dependency {
     if (!service.instance) {
       if (!service.promise) {
         service.promise = service.factory(this).then((instance) => {
-          logger.debug("Dependency:", name, "initialized.");
+          logger.debug("Dependency:", name, "initialized!");
           service.instance = instance;
           return instance;
         });

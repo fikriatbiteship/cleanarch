@@ -8,12 +8,12 @@ services:
     environment:
       NODE_NO_WARNINGS: "1"
       PORT: ${PORT:-8081}
-      DATABASE_URL: ${DATABASE:-mongodb://mongo:27017/clean-architecture-example}
     volumes:
       - ./:/workspaces/clean-architecture-example/
       - node_modules:/workspaces/biteship-sap-mvc/node_modules/
     external_links:
       - mongo
+      - postgres
     networks:
       - biteship
     ports:

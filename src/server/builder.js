@@ -7,16 +7,11 @@ const HTTPModule = require("../common/module/HTTPModule");
 const Request = require("../common/Request");
 
 const srcDir = path.join(__dirname, "..");
+const domainDir = path.join(srcDir, "domain");
 
-/**
- * Route express application
- * @param {import('express').Application} app
- * @param {Dependency} deps
- */
-module.exports = async (app, deps = new Dependency()) => {
-  const mods = new Set();
-  fs.readdirSync(srcDir).forEach((modDir) => {
-    const modPath = path.join(srcDir, modDir, "index.js");
+function importModules(mods, deps, directory) {
+  fs.readdirSync(directory).forEach((modDir) => {
+    const modPath = path.join(directory, modDir, "index.js");
     if (!fs.existsSync(modPath)) return;
 
     const _Module = require(modPath);
@@ -26,7 +21,7 @@ module.exports = async (app, deps = new Dependency()) => {
     mod.wire(deps);
     mods.add(mod);
 
-    const requestsDir = path.join(srcDir, modDir, "requests");
+    const requestsDir = path.join(directory, modDir, "requests");
     if (!fs.existsSync(requestsDir)) return;
 
     for (const requestFile of fs.readdirSync(requestsDir)) {
@@ -37,6 +32,18 @@ module.exports = async (app, deps = new Dependency()) => {
       logger.debug("Builder:", "request", _Request.name, "schema compiled.");
     }
   });
+}
+
+/**
+ * Route express application
+ * @param {import('express').Application} app
+ * @param {Dependency} deps
+ */
+module.exports = async (app, deps = new Dependency()) => {
+  const mods = new Set();
+
+  importModules(mods, deps, srcDir);
+  importModules(mods, deps, domainDir);
 
   for (const mod of mods) {
     if (mod instanceof HTTPModule) {
